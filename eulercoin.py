@@ -56,20 +56,13 @@ n = (min * invN) % M
 
 # Dictionary with items (n: Nn) where Nn = N * n (mod M).
 dict = {}
-# Iterate descending from min to 0.
-for Nn in range(min, 0, -1):
-    # Find the new n (namely n1) from which Nn comes: Nn = N * n1 (mod M).
+# Find the new n (namely n1) for each Nn = N * n1 (mod M) in [1..min].
+for Nn in range(1, min):
     n1 = (Nn * invN) % M
-    
-    # - If n1 > n, then the key-value pair (n1: Nn) is added to dict.
-    # - Otherwise do nothing (we got through this step during brute-force
-    #   stage).
-    if n1 > n:
-        dict[n1] = Nn
+    dict[n1] = Nn
 
 # Order dict by ascending keys and iterate.
-dict = sorted(dict.items())
-for n, Nn in dict:
+for n, Nn in sorted(dict.items()):
     # If Nn < min, then we got Eulercoin: update min and add it to sum.
     if Nn < min:
         min = Nn
