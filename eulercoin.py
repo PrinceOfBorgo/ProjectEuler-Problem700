@@ -16,7 +16,7 @@ def t_print(strings, lengths = []):
 t_print(["Eulercoin", "Sum"], [20])
 print("-"*36)
 t_print([min, sum], [20])
-# Bruteforce attack to find the first eulercoins for the next attack. 
+# Brute-force attack to find the first Eulercoins for the next attack. 
 Nn = N
 while Nn > 100000000:
     Nn = (Nn + N) % M
@@ -25,7 +25,7 @@ while Nn > 100000000:
         sum += Nn
         t_print([min, sum], [20])
 
-t_print(["","","<< end bruteforce attack"], [20,18])        
+t_print(["","","<< end brute-force attack"], [20,18])        
 t_print(["","","<< start tail analysis"], [20,18])
 
 # Modular multiplicative inverse: used to find the inverse of N modulo M.
@@ -51,7 +51,7 @@ def modinv(a, n):
 invN = modinv(N, M)
 
 # N * n = Nn (mod M) ---> n = Nn / N (mod M) = Nn * invN (mod M)
-# We start from Nn = min (precalculated during bruteforce stage).
+# We start from Nn = min (precalculated during brute-force stage).
 n = (min * invN) % M 
 
 # Dictionary with items (n: Nn) where Nn = N * n (mod M).
@@ -62,7 +62,7 @@ for Nn in range(min, 0, -1):
     n1 = (Nn * invN) % M
     
     # - If n1 > n, then the key-value pair (n1: Nn) is added to dict.
-    # - Otherwise do nothing (we got through this step during bruteforce
+    # - Otherwise do nothing (we got through this step during brute-force
     #   stage).
     if n1 > n:
         dict[n1] = Nn
@@ -70,12 +70,12 @@ for Nn in range(min, 0, -1):
 # Order dict by ascending keys and iterate.
 dict = sorted(dict.items())
 for n, Nn in dict:
-    # If Nn < min, then we got eulercoin: update min and add it to sum.
+    # If Nn < min, then we got Eulercoin: update min and add it to sum.
     if Nn < min:
         min = Nn
         sum += Nn
         t_print([min, sum], [20])
-        # If Nn is 1, the only remaining eulercoin is 0.
+        # If Nn is 1, the only remaining Eulercoin is 0.
         if Nn == 1:
             t_print([0, sum], [20])
             break
