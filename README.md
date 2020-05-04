@@ -23,5 +23,5 @@ To do so we fix an `Nn` from 1 to the minimum Eulercoin found, `min`, (i.e. `158
 ## Usage
 Simply run `eulercoin.py` as a python script:
 ```
->> python eulercoin.py
+$ python eulercoin.py
 ```
